@@ -3,6 +3,7 @@ package com.dk.order_service.controller;
 import com.dk.order_service.dto.CreateOrderRequest;
 import com.dk.order_service.dto.OrderResponse;
 import com.dk.order_service.service.OrderService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +20,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderResponse> create(@RequestBody CreateOrderRequest request) {
+    public ResponseEntity<OrderResponse> create(@Valid @RequestBody CreateOrderRequest request) {
         OrderResponse response = orderService.createOrder(request);
         return ResponseEntity
                 .created(URI.create("/orders/" + response.id()))
